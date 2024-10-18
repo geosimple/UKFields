@@ -16,7 +16,7 @@ if __name__ == "__main__":
     contours_dir = 'contours'
     output_file = f'{path_root}/merged.gpkg'
 
-    setup_environment(out_name, pred_dir, weight_file, shape, buffer)
+    setup_environment(out_name, pred_dir, weight_file, shape, buffer, path_root)
     meta, vrt_dim, transform = get_vrt_metadata(out_name)
     #if large vrt file, run on high memory machine
     generate_contours(out_name, vrt_dim, buffer, contours_dir)

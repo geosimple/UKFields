@@ -16,7 +16,8 @@ import pandas as pd
 
 #vectorisation code from https://github.com/sentinel-hub/field-delineation/blob/main/fd/vectorisation.py
 
-def setup_environment(vrt_filename, pred_directory, weight_file, shape, buffer):
+
+def setup_environment(vrt_filename, pred_directory, weight_file, shape, buffer, path_root ):
     """
     Sets up the environment by creating a weight file and writing the VRT file.
 
@@ -35,7 +36,7 @@ def setup_environment(vrt_filename, pred_directory, weight_file, shape, buffer):
     with rasterio.open(weight_file, 'w', driver='GTiff', width=shape[0], height=shape[1], count=1, dtype=np.float32) as dst:
         dst.write_band(1, get_weights(shape, buffer))
 
-    write_vrt(tifs, weight_file, vrt_filename)
+    write_vrt(tifs, weight_file, vrt_filename, path_root)
 
 
 def get_vrt_metadata(vrt_file):
@@ -137,7 +138,7 @@ def run_contour(row_col: tuple, size: int, vrt_file: str, threshold: float = 0.6
     except Exception as exc:
         return f'{contours_dir}/{file}.gpkg', False, exc
     
-def write_vrt(files, weights_file, out_vrt, function = None):
+def write_vrt(files, weights_file, out_vrt, path_root, function = None):
     """ Write virtual raster
 
     Function that will first build a temp.vrt for the input files, and then modify it for purposes of spatial merging
@@ -148,7 +149,7 @@ def write_vrt(files, weights_file, out_vrt, function = None):
         function = average_function()
 
     # build a vrt from list of input files
-    gdal_str = f'gdalbuildvrt temp.vrt -b 1 {" ".join(files)}'
+    gdal_str = f'gdalbuildvrt {path_root}/temp.vrt -b 1 {" ".join(files)}'
     #save gdal_str to a tmp file then execute the file
     with open('gdalbuildvrt.sh', 'w') as f:
         f.write(gdal_str)
@@ -156,7 +157,7 @@ def write_vrt(files, weights_file, out_vrt, function = None):
     os.remove('gdalbuildvrt.sh')
 
     # fix the vrt
-    root = etree.parse('temp.vrt').getroot()
+    root = etree.parse(f'{path_root}/temp.vrt').getroot()
     vrtrasterband = root.find('VRTRasterBand')
     rasterbandchildren = list(vrtrasterband)
     root.remove(vrtrasterband)
