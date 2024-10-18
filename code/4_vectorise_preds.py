@@ -8,7 +8,7 @@ from sys import argv
 
 if __name__ == "__main__":
     out_name = "demo.vrt"
-    pred_dir = agrv[1] #"/home/eesjb/Documents/segment-anything/segment-anything-eo/predictions/utm27700"
+    pred_dir = argv[1] #"/home/eesjb/Documents/segment-anything/segment-anything-eo/predictions/utm27700"
     weight_file = 'weights.tif'
     shape = (1024, 1024)
     buffer = 128
