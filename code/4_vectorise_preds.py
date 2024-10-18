@@ -5,15 +5,16 @@ gdal.UseExceptions()
 from utils import setup_environment, get_vrt_metadata, generate_contours, merge_contours
 from sys import argv
 
+path_root=argv[2]
 
 if __name__ == "__main__":
-    out_name = "demo.vrt"
+    out_name = f'{path_root}/demo.vrt'
     pred_dir = argv[1] #"/home/eesjb/Documents/segment-anything/segment-anything-eo/predictions/utm27700"
-    weight_file = 'weights.tif'
+    weight_file = f'{path_root}/weights.tif'
     shape = (1024, 1024)
     buffer = 128
     contours_dir = 'contours'
-    output_file = 'merged.gpkg'
+    output_file = f'{path_root}/merged.gpkg'
 
     setup_environment(out_name, pred_dir, weight_file, shape, buffer)
     meta, vrt_dim, transform = get_vrt_metadata(out_name)
