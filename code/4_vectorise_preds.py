@@ -3,10 +3,12 @@ gdal.SetConfigOption('GDAL_VRT_ENABLE_PYTHON', 'YES')
 gdal.UseExceptions()
 
 from utils import setup_environment, get_vrt_metadata, generate_contours, merge_contours
+from sys import argv
+
 
 if __name__ == "__main__":
     out_name = "demo.vrt"
-    pred_dir = "/home/eesjb/Documents/segment-anything/segment-anything-eo/predictions/utm27700"
+    pred_dir = agrv[1] #"/home/eesjb/Documents/segment-anything/segment-anything-eo/predictions/utm27700"
     weight_file = 'weights.tif'
     shape = (1024, 1024)
     buffer = 128
