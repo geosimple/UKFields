@@ -192,7 +192,7 @@ def write_vrt(files, weights_file, out_vrt, path_root, function = None):
     for new_source in new_sources:
         raster_band_tag.append(new_source)
 
-    os.remove('temp.vrt')
+    os.remove(f'{path_root}/temp.vrt')
 
     with open(out_vrt, 'w') as out:
         out.writelines(etree.tounicode(root, pretty_print=True))
