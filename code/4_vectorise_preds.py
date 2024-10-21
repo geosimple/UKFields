@@ -20,4 +20,4 @@ if __name__ == "__main__":
     meta, vrt_dim, transform = get_vrt_metadata(out_name)
     #if large vrt file, run on high memory machine
     generate_contours(out_name, vrt_dim, buffer, contours_dir, path_root)
-    merge_contours(vrt_dim, buffer, contours_dir, output_file, path_root)
+    merge_contours(vrt_dim, buffer, contours_dir, output_file)
