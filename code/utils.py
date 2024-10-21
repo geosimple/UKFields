@@ -58,7 +58,7 @@ def get_vrt_metadata(vrt_file):
     return meta, vrt_dim, transform
 
 
-def generate_contours(vrt_file, vrt_dim, buffer, contours_dir, multiprocessing_contour=True, pool_size=2):
+def generate_contours(vrt_file, vrt_dim, buffer, contours_dir, path_root, multiprocessing_contour=True, pool_size=2):
     """
     Generates contours from the VRT file.
 
