@@ -11,7 +11,7 @@ if __name__ == "__main__":
     out_name = f'{path_root}/demo.vrt'
     pred_dir = argv[1] #"/home/eesjb/Documents/segment-anything/segment-anything-eo/predictions/utm27700"
     weight_file = f'{path_root}/weights.tif'
-    shape = (1024, 1024)
+    shape = (512, 512)
     buffer = 128
     contours_dir = argv[3] #'contours'
     output_file = f'{path_root}/merged.gpkg'
